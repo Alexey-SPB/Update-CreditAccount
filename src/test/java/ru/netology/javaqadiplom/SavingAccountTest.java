@@ -107,20 +107,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(10_000, account.getBalance());
     }
-
-    @Test  //установка отрицательного значения суммы пополнения
-    public void shouldCheckAmount() {
-        SavingAccount account = new SavingAccount(
-                2_000,
-                1_000,
-                10_000,
-                5
-        );
-
-        account.add(-2_000);
-
-        Assertions.assertEquals(false, account.getBalance());
-    }
+    
 
     @Test //проверка оплаты до минимального значения
     public void shouldPayToMinBalance() {
@@ -132,5 +119,17 @@ public class SavingAccountTest {
         );
 
         Assertions.assertTrue(account.pay(2_000));
+    }
+
+    @Test  //установка положительной годовой ставки
+    public void shouldFindYearChangeWithZeroBalance() {
+        SavingAccount account = new SavingAccount(
+                -200,
+                1_000,
+                10_000,
+                15
+        );
+
+        Assertions.assertEquals(0, account.yearChange());
     }
 }
