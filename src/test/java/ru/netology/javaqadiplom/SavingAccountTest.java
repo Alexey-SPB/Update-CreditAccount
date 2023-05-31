@@ -121,4 +121,16 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(false, account.getBalance());
     }
+
+    @Test //проверка оплаты до минимального значения
+    public void shouldPayToMinBalance() {
+        SavingAccount account = new SavingAccount(
+                3_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        Assertions.assertTrue(account.pay(2_000));
+    }
 }
