@@ -131,4 +131,26 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
+    @Test  //сравнение минимального и максимального балансов
+    public void shouldThrowMinBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    3_000,
+                    11_000,
+                    10_000,
+                    5
+            );
+        });
+    }
+    @Test  //сравнение минимального и максимального балансов
+    public void shouldThrowInitialBalanceAboveZero() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    -1_000,
+                    11_000,
+                    10_000,
+                    5
+            );
+        });
+    }
 }
