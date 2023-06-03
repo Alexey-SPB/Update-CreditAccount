@@ -57,17 +57,16 @@ public class SavingAccountTest {
 
     @Test  //установка отрицательного значения годовой ставки
     public void shouldThrowRate() {
-        SavingAccount account = new SavingAccount(
-                3_000,
-                1_000,
-                10_000,
-                -5
-        );
-
-        Assertions.assertThrows(IllegalAccessError.class, () ->{
-            account.getRate();
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    3_000,
+                    1_000,
+                    10_000,
+                    -5
+            );
         });
     }
+
     @Test  ///проверка пополнения баланса больше макисмального значения
     public void shouldAddAboveThanMaxBalance() {
         SavingAccount account = new SavingAccount(
