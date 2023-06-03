@@ -142,12 +142,12 @@ public class SavingAccountTest {
             );
         });
     }
-    @Test  //сравнение минимального и максимального балансов
-    public void shouldThrowInitialBalanceAboveZero() {
+    @Test  //проверка возможности ввода начального баланса меньше минимального
+    public void shouldThrowInitialBalanceAboveMinBalance() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
-                    -1_000,
-                    11_000,
+                    500,
+                    1_000,
                     10_000,
                     5
             );
