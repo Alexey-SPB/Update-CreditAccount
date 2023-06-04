@@ -57,17 +57,16 @@ public class SavingAccountTest {
 
     @Test  //установка отрицательного значения годовой ставки
     public void shouldThrowRate() {
-        SavingAccount account = new SavingAccount(
-                3_000,
-                1_000,
-                10_000,
-                -5
-        );
-
-        Assertions.assertThrows(IllegalAccessError.class, () ->{
-            account.getRate();
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    3_000,
+                    1_000,
+                    10_000,
+                    -5
+            );
         });
     }
+
     @Test  ///проверка пополнения баланса больше макисмального значения
     public void shouldAddAboveThanMaxBalance() {
         SavingAccount account = new SavingAccount(
@@ -122,14 +121,36 @@ public class SavingAccountTest {
     }
 
     @Test  //расчет годовой ставки при отрицательном балансе
-    public void shouldFindYearChangeWithUnderZeroBalance() {
-        SavingAccount account = new SavingAccount(
-                -200,
-                1_000,
-                10_000,
-                15
-        );
-
-        Assertions.assertEquals(0, account.yearChange());
+    public void shouldTrowBalanceUnderZero() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    -500,
+                    1_000,
+                    10_000,
+                    5
+            );
+        });
+    }
+    @Test  //сравнение минимального и максимального балансов
+    public void shouldThrowMinBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    3_000,
+                    11_000,
+                    10_000,
+                    5
+            );
+        });
+    }
+    @Test  //проверка возможности ввода начального баланса меньше минимального
+    public void shouldThrowInitialBalanceAboveMinBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    500,
+                    1_000,
+                    10_000,
+                    5
+            );
+        });
     }
 }
