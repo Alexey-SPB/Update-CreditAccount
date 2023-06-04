@@ -113,9 +113,6 @@ public class SavingAccount extends Account {
     }
 
 
-
-
-
     public int getMinBalance() {
 
         return minBalance;
