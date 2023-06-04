@@ -35,7 +35,6 @@ public class CreditAccount extends Account {
             this.balance = initialBalance;
         }
 
-
         if (creditLimit < 0) {
             throw new IllegalArgumentException(
                     "Кредитный лимит не может быть отрицательным, а у вас:" + creditLimit
